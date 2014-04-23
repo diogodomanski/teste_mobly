@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-22 01:46-0300\n"
-"PO-Revision-Date: 2014-04-22 01:48-0300\n"
+"POT-Creation-Date: 2014-04-22 22:47-0300\n"
+"PO-Revision-Date: 2014-04-22 22:47-0300\n"
 "Last-Translator: Diogo Domanski de Souza <diogo@ebecom.com.br>\n"
 "Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
 "Language: pt_BR\n"
@@ -111,6 +111,7 @@ msgstr "Qtd"
 
 #: ../view/application/index/index.phtml:113
 #: ../view/application/index/index.phtml:202
+#: ../view/application/index/index.phtml:262
 msgid "Total"
 msgstr "Total"
 
@@ -159,6 +160,22 @@ msgstr "Preço unitário"
 #: ../view/application/index/index.phtml:220
 msgid "Place order"
 msgstr "Concluir pedido"
+
+#: ../view/application/index/index.phtml:230
+msgid "My orders"
+msgstr "Meus pedidos"
+
+#: ../view/application/index/index.phtml:234
+msgid "You have no orders."
+msgstr "Você não tem pedidos."
+
+#: ../view/application/index/index.phtml:250
+msgid "Date"
+msgstr "Data"
+
+#: ../view/application/index/index.phtml:254
+msgid "Items"
+msgstr "Itens"
 
 #~ msgid "My account"
 #~ msgstr "Minha conta"
