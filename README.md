@@ -15,6 +15,7 @@ Instalação
 3. Criar banco de dados (MySQL). Script encontra-se no arquivo BD.sql
 4. Informar dados de acesso ao BD no arquivo /config/autoload/doctrine_orm.global.php (propriedade 'connection')
 5. Configurar servidor de páginas para rodar o projeto (vide seção Configuração Servidor Páginas)
+6. Garantir que o diretório /data/DoctrineORMModule/Proxy tenha permissão de escrita pelo usuário do servidor de páginas
 	
 
 Configuração Servidor Páginas

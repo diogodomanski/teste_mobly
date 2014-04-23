@@ -39,8 +39,8 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a ui-sref="store.shopping-cart"><span class="glyphicon glyphicon-shopping-cart"></span> <?php echo $this->translate("Shopping cart"); ?> <span class="badge">{{shoppingCartCount}}</span></a></li>
 						<li ng-show="currentUser == null"><a ui-sref="store.login"><?php echo $this->translate("Login"); ?></a></li>
-						<li ng-show="currentUser != null"><a ui-sref="store.my-orders">Meus Pedidos</a></li>
-						<li ng-show="currentUser != null"><a ui-sref="store.shopping-cart">Bem-vindo {{currentUser.name}}</a></li>
+						<li ng-show="currentUser != null"><a ui-sref="store.my-orders"><?php echo $this->translate("My Orders"); ?></a></li>
+						<li ng-show="currentUser != null"><a ui-sref="store.shopping-cart"><?php echo $this->translate("Welcome"); ?> {{currentUser.name}}</a></li>
 					</ul>
 				</div><!-- /.nav-collapse -->
 			</div><!-- /.container -->
