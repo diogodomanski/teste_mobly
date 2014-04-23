@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="img/favicon.ico">
+
+		<title>Teste Mobly - Diogo Domanski de Souza</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/offcanvas.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body ng-controller="MainController">
+		<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#" style="padding: 3px"><img src="img/logo.png"/></a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a ui-sref="store.shopping-cart"><span class="glyphicon glyphicon-shopping-cart"></span> <?php echo $this->translate("Shopping cart"); ?> <span class="badge">{{shoppingCartCount}}</span></a></li>
+						<li ng-show="currentUser == null"><a ui-sref="store.login"><?php echo $this->translate("Login"); ?></a></li>
+						<li ng-show="currentUser != null"><a ui-sref="store.my-orders">Meus Pedidos</a></li>
+						<li ng-show="currentUser != null"><a ui-sref="store.shopping-cart">Bem-vindo {{currentUser.name}}</a></li>
+					</ul>
+				</div><!-- /.nav-collapse -->
+			</div><!-- /.container -->
+		</div><!-- /.navbar -->
+
+		<div class="container-fluid" ui-view>
+			<?php echo $this->content; ?>
+
+			<hr>
+            <footer>
+                <p>&copy; 2014 por Diogo Domanski de Souza.</p>
+            </footer>
+		</div><!--/.container-->
+		<?php echo $this->inlineScript() ?>
+
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/i18n/angular-locale_pt-br.js"></script>
+		<script src="js/angular/angular-ui-router.min.js"></script>
+		<script src="js/angular/angular-animate.min.js"></script>
+		<script src="js/angular/angular-resource.min.js"></script>
+		<script src="js/angular/ui-bootstrap-tpls-0.10.0.min.js"></script>
+		<!-- <script src="js/offcanvas.js"></script> -->
+		<!-- <script src="js/application/animations.js"></script> -->
+		<script src="js/application/controllers.js"></script>
+		<script src="js/application/filters.js"></script>
+		<script src="js/application/services.js"></script>
+		<script src="js/application/app.js"></script>
+	</body>
+</html>

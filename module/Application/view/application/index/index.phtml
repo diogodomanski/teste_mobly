@@ -1,0 +1,269 @@
+<script type="text/ng-template" id="modalDialog.html">
+	<div class="modal-header">
+		<h3><?php echo $this->translate("Message"); ?></h3>
+	</div>
+	<div class="modal-body">
+		<p>{{dialogMessage}}</p>
+	</div>
+	<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="closeDialog()">OK</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="store-template.html">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="list-group">
+				<a href="javascript://" class="list-group-item" ng-click="selectCategory(category.id)" ng-class="{active: selectedCategory == category.id}" ng-repeat="category in categories">{{category.name}}</a>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-9">
+			<p class="visible-xs">
+				<button type="button" class="btn btn-default btn-sm" ng-click="toggleMenu()"><span class="glyphicon glyphicon-align-justify"></span> Categorias</button>
+			</p>
+			<div class="view-frame" ui-view></div>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="myModalContent.html">
+	<div class="modal-header">
+		<h3>I'm a modal!</h3>
+	</div>
+	<div class="modal-body">
+		<ul>
+			<li ng-repeat="item in items">
+				<a ng-click="selected.item = item">{{ item }}</a>
+			</li>
+		</ul>
+		Selected: <b>{{ selected.item }}</b>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="product-list-template.html">
+	<div class="row">
+		<div class="col-12 col-sm-12 col-lg-12" ng-repeat="product in products | orderBy:orderProp">
+			<div class="row-fluid">
+				<div class="col-2 col-sm-2 col-lg-2">
+					<img class="img-rounded product-list-thumb" ng-src="/application/index/get-product-image/{{product.images[0].id}}" alt="{{product.name}}">
+				</div>
+				<div class="col-10 col-sm-10 col-lg-10">
+					<h2>{{product.name}}</h2>
+					<p>{{product.description}}</p>
+					<p><a class="btn btn-default" href="#" ng-click="loadProductDetails(product.id)" role="button">View details &raquo;</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="product-detail-template.html">
+	<div class="row">
+	<div class="col-6 col-sm-6 col-lg-6">
+	<a href="#" class="btn btn-link" ng-click="backToStore()"><span class="glyphicon glyphicon-chevron-left"></span> <?php echo $this->translate('Back'); ?></a>
+	</div>
+	<div class="col-5 col-sm-5 col-lg-5">
+	<a href="#" class="btn btn-success pull-right" ng-click="addToShoppingCart(selectedProduct, 1)"><span class="glyphicon glyphicon-shopping-cart"></span> <?php echo $this->translate('Add to shopping cart'); ?></a>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-9 col-sm-9 col-lg-9">
+	<div class="product-images">
+	<img ng-src="/application/index/get-product-image/{{img.id}}"
+	class="product"
+	ng-repeat="img in selectedProduct.images"
+	ng-class="{active: selecteImageId == img.id}">
+	</div>
+
+	<h1>{{selectedProduct.name}}</h1>
+	<p>{{selectedProduct.description}}</p>
+
+	<ul class="product-thumbs">
+	<li ng-repeat="img in selectedProduct.images">
+	<img ng-src="/application/index/get-product-image/{{img.id}}" ng-click="setImage(img.id)">
+	</li>
+	</ul>
+
+	<ul class="specs">
+	<li ng-repeat="feature in selectedProduct.features">
+	<dl>
+	<dt>{{feature.name}}</dt>
+	<dd>{{feature.value}}</dd>
+	</dl>
+	</li>
+	</ul>
+	</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="shopping-cart-template.html">
+	<h1><?php echo $this->translate("Shopping cart"); ?></h1>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><?php echo $this->translate("Product"); ?></th>
+				<th><?php echo $this->translate("Unity Price"); ?></th>
+				<th><?php echo $this->translate("Qty"); ?></th>
+				<th><?php echo $this->translate("Total"); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in shoppingCart">
+				<td>{{item.name}}</td>
+				<td>{{item.price}}</td>
+				<td>
+					<div class="input-group col-xs-3">
+						<input type="text" class="form-control " ng-model="item.count" ng-change="mudouQtd(item)">
+							<span class="input-group-btn">
+							<a class="btn btn-danger" ng-click="removeFromShoppingCart(item)"><span class="glyphicon glyphicon-trash"></span></a>
+						</span>
+					</div>
+				</td>
+				<td>{{item.total}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"></td>
+				<td>{{shoppingCartPrice}}</td>
+			</tr>
+			<tr ng-show="shoppingCart.length == 0">
+				<td colspan="4"><?php echo $this->translate("Empty shopping cart"); ?></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">
+					<a class="btn btn-success pull-right" ng-show="shoppingCart.length" ng-click="showCheckoutForm()"><?php echo $this->translate("Proceed with checkout"); ?> <span class="glyphicon glyphicon-chevron-right"</a>
+				</td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+</script>
+
+<script type="text/ng-template" id="login-template.html">
+	<h1><?php echo $this->translate("Login"); ?></h1>
+
+	<form class="form-horizontal" role="form">
+	<div class="form-group">
+	<label for="email" class="col-sm-2 control-label"><?php echo $this->translate("Email"); ?></label>
+	<div class="col-sm-10">
+	<input type="email" class="form-control" ng-model="email" id="email" placeholder="<?php echo $this->translate("Email"); ?>">
+	</div>
+	</div>
+
+	<div class="form-group">
+	<label for="password" class="col-sm-2 control-label"><?php echo $this->translate("Password"); ?></label>
+	<div class="col-sm-10">
+	<input type="password" class="form-control" ng-model="password" id="password" placeholder="<?php echo $this->translate("Password"); ?>">
+	</div>
+	</div>
+
+	<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+	<button type="button" class="btn btn-default" ng-click="login()"><?php echo $this->translate("Sign in"); ?></button>
+	</div>
+	</div>
+	</form>
+
+</script>
+
+<script type="text/ng-template" id="checkout-template.html">
+	<h1><?php echo $this->translate("Review your order"); ?></h1>
+
+	<h2><?php echo $this->translate("Customer data"); ?></h2>
+	<table class="table">
+		<tr>
+			<th>Name:</th>
+			<td>{{currentUser.name}}</td>
+		</tr>
+		<tr>
+			<th>Email:</th>
+			<td>{{currentUser.email}}</td>
+		</tr>
+		<tr>
+			<th>Address:</th>
+			<td>{{currentUser.address}}</td>
+		</tr>
+	</table>
+	
+	<h2><?php echo $this->translate("Order items"); ?></h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><?php echo $this->translate("Product"); ?></th>
+				<th><?php echo $this->translate("Unity price"); ?></th>
+				<th><?php echo $this->translate("Qty"); ?></th>
+				<th><?php echo $this->translate("Total"); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in shoppingCart">
+				<td>{{item.name}}</td>
+				<td>{{item.price}}</td>
+				<td>{{item.count}}</td>
+				<td>{{item.total}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"></td>
+				<td>{{shoppingCartPrice}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">
+					<a class="btn btn-success pull-right" ng-click="placeOrder()"><span class="glyphicon glyphicon-ok"></span> <?php echo $this->translate("Place order"); ?></a>
+				</td>
+				<td></td>
+			</tr>
+			</tfoot>
+	</table>
+</script>
+
+
+<script type="text/ng-template" id="my-orders-template.html">
+	<h1><?php echo $this->translate("My orders"); ?></h1>
+	
+	<div class="row" ng-show="orders.length == 0">
+		<div class="col-12 col-sm-12 col-lg-12">
+			<p><?php echo $this->translate("You have no orders."); ?></p>
+		</div>
+	</div>
+	
+	<div class="row" ng-show="orders.length" ng-repeat="order in orders">
+		<div class="col-12 col-sm-12 col-lg-12">
+			<h2>#{{order.id}}</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>		
+					<tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<th><?php echo $this->translate("Date"); ?>: </th>		
+						<td>{{order.insert_date | date}}</td>
+					</tr>
+					<tr>
+						<th><?php echo $this->translate("Items"); ?>: </th>		
+						<td>
+							<ul>
+								<li ng-repeat="item in order.items">{{item.count}} x {{item.product_name}} = R$ {{item.total | currency}}</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th><?php echo $this->translate("Total"); ?>: </th>
+						<td>{{order.total | currency}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</script>
